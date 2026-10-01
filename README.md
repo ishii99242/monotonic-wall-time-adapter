@@ -32,3 +32,10 @@ The trade-off is that `perf_counter` can be marginally lower overhead and higher
 Values from this clock are only meaningful as deltas against other readings from the same clock instance (or from `monotonic_now`). They are not comparable to `time.time()`, not comparable across processes, and not comparable across separate `MonotonicClock` instances — each instance samples its own epoch at construction. The `epoch` property and the `epoch=` constructor argument exist precisely so you can share an origin when you need to.
 
 If the underlying source ever reports a reading fractionally below the stored epoch due to float rounding, the implementation clamps the result to `0.0` rather than returning a negative elapsed time.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
