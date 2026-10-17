@@ -1,6 +1,6 @@
 [project]
 name = "monotonic-wall-time-adapter"
-version = "0.1.0"
+version = "0.1.1"
 description = "Provides a single clock function returning a monotonic float with a stable epoch, hiding the difference between time.monotonic and perf_counter."
 requires-python = ">=3.10"
 dependencies = []
